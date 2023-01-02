@@ -16,7 +16,7 @@ RSpec.describe 'the movies show page' do
 
     visit "/movies/#{spirited_away.id}"
 
-    expect(page).to have_content(spirited_away.name)
+    expect(page).to have_content(spirited_away.title)
     expect(page).to have_content(spirited_away.creation_year)
     expect(page).to have_content(spirited_away.genre)
   end
