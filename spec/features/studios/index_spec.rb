@@ -45,5 +45,12 @@ RSpec.describe 'the studios index' do
       expect(page).to have_content(castles.genre)
       expect(page).to have_no_content(runner.genre)
     end
+
+    within("#studio-#{studio_2.id}") do
+      expect(page).to have_no_content(spirited_away.title)
+      expect(page).to have_content(runner.title)
+      expect(page).to have_content(runner.creation_year)
+      expect(page).to have_content(runner.genre)
+    end
   end
 end
