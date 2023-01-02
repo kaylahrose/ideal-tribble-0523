@@ -12,7 +12,7 @@ RSpec.describe 'the movies show page' do
   it 'lists movies title, creation year, and genre' do
     studio_1 = Studio.create!(name: 'Gibbly', location: 'Japan')
     spirited_away = studio_1.movies.create!(title: 'Spirited Away', creation_year: 1998, genre: 'Animation')
-    castles = studio_1.movies.create!(title: 'Castles In The Sky', creation_year: 2003, genre: 'Animation')
+    # castles = studio_1.movies.create!(title: 'Castles In The Sky', creation_year: 2003, genre: 'Animation')
 
     visit "/movies/#{spirited_away.id}"
 
@@ -21,6 +21,23 @@ RSpec.describe 'the movies show page' do
     expect(page).to have_content(spirited_away.genre)
   end
 
-  it 'lists all actors from youngest to oldest'
+  it 'lists all actors from youngest to oldest' do
+    studio_1 = Studio.create!(name: 'Gibbly', location: 'Japan')
+    spirited_away = studio_1.movies.create!(title: 'Spirited Away', creation_year: 1998, genre: 'Animation') 
+    james = Actor.create!(name: "James Cameron", age: 74)
+    andre = Actor.create!(name: "Andre Botkin", age: 36)
+    mariah = Actor.create!(name: "Mariah Ahmed", age: 33)
+
+    ActorMovie.create!(actor_id: james.id, movie_id: spirited_away.id)
+    ActorMovie.create!(actor_id: andre.id, movie_id: spirited_away.id)
+    ActorMovie.create!(actor_id: mariah.id, movie_id: spirited_away.id)
+
+    visit "movies/#{spirited_away.id}"
+
+    expect(andre.name).to appear_before(james.name)
+    expect(mariah.name).to appear_before(andre.name)
+    expect(mariah.name).to appear_before(james.name)
+    expect(james.name).to_not appear_before(andre.name)
+  end
   it 'shows average age of all the movies actors'
 end
