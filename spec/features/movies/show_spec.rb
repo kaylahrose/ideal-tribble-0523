@@ -82,7 +82,7 @@ RSpec.describe 'the movies show page' do
 
     expect(page).to have_no_content(mariah.name)
 
-    fill_in('Actor id', with: "#{mariah.id}")
+    fill_in('Actor identification', with: mariah.id.to_s)
     click_on 'Add Actor'
 
     expect(current_path).to eq("/movies/#{spirited_away.id}")
