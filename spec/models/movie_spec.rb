@@ -42,7 +42,7 @@ RSpec.describe Movie do
         ActorMovie.create!(actor_id: andre.id, movie_id: spirited_away.id)
         ActorMovie.create!(actor_id: mariah.id, movie_id: spirited_away.id)
 
-        expect(spirited_away.actors_avg_age).to eq(48)
+        expect(spirited_away.actors_avg_age).to eq(47.67)
       end
     end
   end
