@@ -1,5 +1,12 @@
 <h3>Studios</h3>
 
 <% @studios.each do |studio| %>
-  <p><%= studio.name %>, <%=studio.location%></p>
+  <div id='studio-<%=studio.id%>'>
+    <p><%= studio.name %>, <%=studio.location%></p>
+      <% studio.movies.each do |movie| %>
+        <p><%=movie.title%></p>
+        <p><%=movie.creation_year%></p>
+        <p><%=movie.genre%></p>
+      <% end %>
+  </div>
 <% end %>
