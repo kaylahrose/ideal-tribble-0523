@@ -39,5 +39,20 @@ RSpec.describe 'the movies show page' do
     expect(mariah.name).to appear_before(james.name)
     expect(james.name).to_not appear_before(andre.name)
   end
-  it 'shows average age of all the movies actors'
+
+  it 'shows average age of all the movies actors' do
+    studio_1 = Studio.create!(name: 'Gibbly', location: 'Japan')
+    spirited_away = studio_1.movies.create!(title: 'Spirited Away', creation_year: 1998, genre: 'Animation') 
+    james = Actor.create!(name: "James Cameron", age: 74)
+    andre = Actor.create!(name: "Andre Botkin", age: 36)
+    mariah = Actor.create!(name: "Mariah Ahmed", age: 33)
+
+    ActorMovie.create!(actor_id: james.id, movie_id: spirited_away.id)
+    ActorMovie.create!(actor_id: andre.id, movie_id: spirited_away.id)
+    ActorMovie.create!(actor_id: mariah.id, movie_id: spirited_away.id)
+
+    visit "movies/#{spirited_away.id}"
+
+    expect(page).to have_content("47.67")
+  end
 end
